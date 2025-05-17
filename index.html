@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Global Chat</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.7.2.2.min.js"></script>
+</head>
+<body>
+  <div id="login">
+    <input type="text" id="username" placeholder="Enter a username" />
+    <button id="joinBtn">Join Chat</button>
+  </div>
+
+  <div id="chat" class="hidden">
+    <h2>🌐 Global Chat</h2>
+    <div id="messages"></div>
+    <textarea id="msg" placeholder="Type a message..."></textarea>
+    <button id="send">Send</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
