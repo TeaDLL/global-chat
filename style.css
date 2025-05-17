@@ -1,91 +1,214 @@
-body {
+/* Reset & base */
+* {
+  box-sizing: border-box;
+}
+body, html {
   margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  background: #000000;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #000; /* pure black */
+  color: #eee; /* light grey text */
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  color: white;
+}
+
+#app {
+  width: 100%;
+  max-width: 480px;
+  height: 90vh;
+  background: #111; /* dark background */
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.15),
+    0 0 20px rgba(255, 255, 255, 0.1);
   overflow: hidden;
 }
 
-.glass-box {
-  background: rgba(20, 20, 20, 0.9);
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-  animation: glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes glow {
-  from {
-    box-shadow: 0 0 10px #0ff;
-  }
-  to {
-    box-shadow: 0 0 20px #0ff, 0 0 40px #0ff;
-  }
-}
-
-#chat-app {
-  width: 100%;
-  max-width: 500px;
-}
-
-#messages {
-  height: 400px;
-  background: #111;
-  border-radius: 12px;
-  padding: 10px;
-  overflow-y: auto;
-  margin-bottom: 10px;
-  border: 1px solid #0ff3;
-}
-
-.message {
-  margin: 10px 0;
-}
-
-.message img {
-  max-width: 100%;
-  border-radius: 8px;
-}
-
-.chat-header {
-  font-size: 20px;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.chat-controls {
-  display: flex;
-  gap: 6px;
-}
-
-textarea {
+.screen {
   flex: 1;
-  resize: none;
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  background: #222;
-  color: #0ff;
-}
-
-button {
-  background: #0ff;
-  color: #000;
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-button:hover {
-  background: #00cccc;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
 }
 
 .hidden {
   display: none;
+}
+
+/* Login Screen */
+#login-screen {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#login-screen input {
+  width: 70%;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: 1px solid #555;
+  border-radius: 30px;
+  margin-bottom: 15px;
+  background: #222;
+  color: #eee;
+  outline: none;
+  box-shadow: 0 0 5px #fff3;
+  transition: border-color 0.3s ease;
+}
+
+#login-screen input:focus {
+  border-color: #fff;
+  box-shadow: 0 0 12px #fff;
+}
+
+#login-screen button {
+  padding: 10px 30px;
+  border-radius: 30px;
+  border: none;
+  background: #fff;
+  color: #111;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 0 10px #fff;
+  transition: background 0.3s ease;
+}
+
+#login-screen button:hover {
+  background: #eee;
+}
+
+/* Chat Screen */
+header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #333;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-shadow: 0 0 6px #fff8;
+}
+
+#messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  background: #222;
+  border-radius: 12px;
+  margin: 15px 0;
+  box-shadow: inset 0 0 10px #fff2;
+  scrollbar-width: thin;
+  scrollbar-color: #bbb transparent;
+}
+
+#messages::-webkit-scrollbar {
+  width: 8px;
+}
+#messages::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 8px;
+}
+
+/* Each message bubble */
+.message {
+  max-width: 70%;
+  margin-bottom: 12px;
+  padding: 10px 15px;
+  border-radius: 20px;
+  box-shadow: 0 0 5px #fff6;
+  line-height: 1.3;
+  word-wrap: break-word;
+  animation: fadeIn 0.3s ease forwards;
+  position: relative;
+  color: #111;
+  background: #eee; /* white bubbles */
+  filter: drop-shadow(0 0 3px #fff9);
+  user-select: text;
+}
+
+/* Messages sent by self */
+.message.self {
+  margin-left: auto;
+  background: #000;
+  color: #eee;
+  filter: drop-shadow(0 0 6px #0ff);
+}
+
+/* Message sender name */
+.message strong {
+  font-weight: 700;
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+  color: #555;
+}
+
+.message.self strong {
+  color: #0ff;
+}
+
+/* Images inside messages */
+.message img {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #fff8;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Footer controls */
+footer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+textarea#message-input {
+  flex-grow: 1;
+  resize: none;
+  height: 44px;
+  border-radius: 22px;
+  border: none;
+  padding: 0 15px;
+  font-size: 1rem;
+  background: #111;
+  color: #eee;
+  box-shadow: 0 0 8px #fff4;
+  outline: none;
+  transition: height 0.15s ease;
+}
+
+textarea#message-input:focus {
+  box-shadow: 0 0 14px #0ff;
+}
+
+/* Buttons */
+button#send-btn,
+button#image-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #eee;
+  filter: drop-shadow(0 0 5px #0ff);
+  transition: filter 0.2s ease;
+}
+
+button#send-btn:hover,
+button#image-btn:hover {
+  filter: drop-shadow(0 0 12px #0ff);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
