@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
   <title>Black & White Glowing Chat</title>
@@ -8,24 +8,28 @@
 </head>
 <body>
   <div id="app">
+
+    <!-- Login Screen -->
     <div id="login-screen" class="screen">
       <h2>Enter your username</h2>
       <input type="text" id="username" placeholder="Username" autocomplete="off" />
       <button id="login-btn">Join Chat</button>
     </div>
 
+    <!-- Chat Screen -->
     <div id="chat-screen" class="screen hidden">
       <header>
         <h2>Global Chat</h2>
       </header>
-      <div id="messages"></div>
+      <div id="messages" tabindex="0"></div>
       <footer>
-        <textarea id="message-input" placeholder="Type a message"></textarea>
+        <textarea id="message-input" placeholder="Type a message" rows="1"></textarea>
         <input type="file" id="image-upload" accept="image/*" hidden />
         <button id="image-btn" title="Attach Image">📎</button>
         <button id="send-btn" title="Send">➤</button>
       </footer>
     </div>
+
   </div>
 
   <script src="app.js"></script>
