@@ -1,147 +1,155 @@
 /* Reset & base */
 * {
   box-sizing: border-box;
-}
-body, html {
   margin: 0;
   padding: 0;
+}
+html, body {
   height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #000; /* pure black */
-  color: #eee; /* light grey text */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#app {
-  width: 100%;
-  max-width: 480px;
-  height: 90vh;
-  background: #111; /* dark background */
-  display: flex;
-  flex-direction: column;
-  border-radius: 12px;
-  box-shadow:
-    0 0 10px rgba(255, 255, 255, 0.15),
-    0 0 20px rgba(255, 255, 255, 0.1);
+  background: #000;
+  color: #eee;
   overflow: hidden;
 }
 
-.screen {
-  flex: 1;
+#app {
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
-  padding: 15px;
+  background: #111;
+  /* glowing border effect for entire app */
+  box-shadow:
+    inset 0 0 15px 4px #0ff7,
+    0 0 20px 2px #0ff9;
+}
+
+/* Screens take full space */
+.screen {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  background: #111;
+  overflow: hidden;
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
-/* Login Screen */
+/* Login Screen styles */
 #login-screen {
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 
+#login-screen h2 {
+  margin-bottom: 25px;
+  text-shadow: 0 0 10px #0ff8;
+}
+
 #login-screen input {
-  width: 70%;
-  padding: 10px 15px;
-  font-size: 1rem;
-  border: 1px solid #555;
+  width: 300px;
+  max-width: 90vw;
+  padding: 12px 20px;
+  font-size: 1.1rem;
   border-radius: 30px;
-  margin-bottom: 15px;
+  border: 1px solid #444;
   background: #222;
   color: #eee;
+  box-shadow: 0 0 8px #0ff5 inset;
   outline: none;
-  box-shadow: 0 0 5px #fff3;
   transition: border-color 0.3s ease;
+  margin-bottom: 20px;
 }
 
 #login-screen input:focus {
-  border-color: #fff;
-  box-shadow: 0 0 12px #fff;
+  border-color: #0ff;
+  box-shadow: 0 0 15px #0ff;
 }
 
 #login-screen button {
-  padding: 10px 30px;
-  border-radius: 30px;
-  border: none;
-  background: #fff;
-  color: #111;
+  background: #0ff;
+  color: #000;
   font-weight: 700;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 50px;
+  font-size: 1.1rem;
   cursor: pointer;
-  box-shadow: 0 0 10px #fff;
+  box-shadow: 0 0 15px #0ff;
   transition: background 0.3s ease;
 }
 
 #login-screen button:hover {
-  background: #eee;
+  background: #0cc;
 }
 
-/* Chat Screen */
+/* Chat Screen styles */
+
 header {
-  padding-bottom: 10px;
-  border-bottom: 1px solid #333;
+  flex-shrink: 0;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #222;
   text-align: center;
   font-weight: 700;
-  font-size: 1.2rem;
-  text-shadow: 0 0 6px #fff8;
+  font-size: 1.5rem;
+  color: #0ff;
+  text-shadow: 0 0 15px #0ff8;
+  user-select: none;
 }
 
 #messages {
-  flex: 1;
+  flex-grow: 1;
   overflow-y: auto;
-  padding: 10px;
+  margin-top: 15px;
+  padding-right: 10px;
   background: #222;
   border-radius: 12px;
-  margin: 15px 0;
-  box-shadow: inset 0 0 10px #fff2;
+  box-shadow: inset 0 0 15px #0ff6;
   scrollbar-width: thin;
-  scrollbar-color: #bbb transparent;
+  scrollbar-color: #0ff transparent;
 }
 
 #messages::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 #messages::-webkit-scrollbar-thumb {
-  background: #bbb;
+  background: #0ff9;
   border-radius: 8px;
 }
 
-/* Each message bubble */
+/* Message bubbles */
 .message {
-  max-width: 70%;
-  margin-bottom: 12px;
+  max-width: 75%;
   padding: 10px 15px;
   border-radius: 20px;
-  box-shadow: 0 0 5px #fff6;
+  margin-bottom: 12px;
   line-height: 1.3;
   word-wrap: break-word;
-  animation: fadeIn 0.3s ease forwards;
   position: relative;
-  color: #111;
-  background: #eee; /* white bubbles */
-  filter: drop-shadow(0 0 3px #fff9);
+  font-size: 1rem;
+  color: #000;
+  background: #eee;
+  box-shadow: 0 0 10px #0ff7;
   user-select: text;
+  animation: fadeIn 0.3s ease forwards;
 }
 
-/* Messages sent by self */
 .message.self {
   margin-left: auto;
   background: #000;
-  color: #eee;
-  filter: drop-shadow(0 0 6px #0ff);
+  color: #0ff;
+  box-shadow: 0 0 15px #0ff;
 }
 
-/* Message sender name */
 .message strong {
-  font-weight: 700;
   display: block;
-  font-size: 0.85rem;
-  margin-bottom: 4px;
+  font-weight: 700;
+  margin-bottom: 5px;
   color: #555;
 }
 
@@ -152,17 +160,20 @@ header {
 /* Images inside messages */
 .message img {
   max-width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 0 10px #fff8;
-  cursor: pointer;
+  border-radius: 15px;
+  box-shadow: 0 0 15px #0ff8;
   user-select: none;
+  cursor: pointer;
 }
 
-/* Footer controls */
+/* Footer input area */
 footer {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid #222;
+  flex-shrink: 0;
 }
 
 textarea#message-input {
@@ -171,17 +182,23 @@ textarea#message-input {
   height: 44px;
   border-radius: 22px;
   border: none;
-  padding: 0 15px;
-  font-size: 1rem;
-  background: #111;
-  color: #eee;
-  box-shadow: 0 0 8px #fff4;
+  padding: 0 20px;
+  font-size: 1.1rem;
+  background: #000;
+  color: #0ff;
+  box-shadow: 0 0 15px #0ff7 inset;
   outline: none;
-  transition: height 0.15s ease;
+  transition: height 0.2s ease;
+  font-family: inherit;
+}
+
+textarea#message-input::placeholder {
+  color: #0ff9;
+  opacity: 0.7;
 }
 
 textarea#message-input:focus {
-  box-shadow: 0 0 14px #0ff;
+  box-shadow: 0 0 25px #0ff;
 }
 
 /* Buttons */
@@ -189,23 +206,24 @@ button#send-btn,
 button#image-btn {
   background: none;
   border: none;
-  font-size: 1.5rem;
+  color: #0ff;
+  font-size: 1.8rem;
   cursor: pointer;
-  color: #eee;
-  filter: drop-shadow(0 0 5px #0ff);
+  filter: drop-shadow(0 0 6px #0ff);
   transition: filter 0.2s ease;
+  user-select: none;
 }
 
 button#send-btn:hover,
 button#image-btn:hover {
-  filter: drop-shadow(0 0 12px #0ff);
+  filter: drop-shadow(0 0 15px #0ff);
 }
 
 /* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
