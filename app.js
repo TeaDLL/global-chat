@@ -33,11 +33,18 @@ function renderMessage(msg) {
     img.src = msg.image;
     div.appendChild(img);
   } else {
-    div.innerHTML = `<strong>${msg.sender}</strong>${msg.text}`;
+    div.innerHTML = `<strong>${msg.sender}</strong>${escapeHtml(msg.text)}`;
   }
 
   messagesDiv.appendChild(div);
   messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+// Basic text escaping to avoid any raw HTML display
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
 }
 
 function saveMessage(msg) {
@@ -62,6 +69,7 @@ function sendMessage(text, image = null) {
   saveMessage(msg);
   renderMessage(msg);
   messageInput.value = "";
+  adjustTextareaHeight();
 }
 
 function setupPubNub() {
@@ -70,7 +78,6 @@ function setupPubNub() {
   pubnub.addListener({
     message: (event) => {
       const msg = event.message;
-      // Avoid duplicate render for own messages (already rendered on send)
       if (msg.sender !== username) {
         renderMessage(msg);
         saveMessage(msg);
@@ -102,7 +109,6 @@ messageInput.addEventListener("keydown", (e) => {
   }
 });
 
-// Image upload
 imageBtn.onclick = () => imageUpload.click();
 
 imageUpload.onchange = (e) => {
@@ -115,23 +121,7 @@ imageUpload.onchange = (e) => {
   reader.readAsDataURL(file);
 };
 
-// Paste image support
 messageInput.addEventListener("paste", (e) => {
   const items = e.clipboardData.items;
   for (let item of items) {
-    if (item.type.startsWith("image/")) {
-      const file = item.getAsFile();
-      const reader = new FileReader();
-      reader.onload = () => sendMessage(null, reader.result);
-      reader.readAsDataURL(file);
-    }
-  }
-});
-
-// Auto-login if saved
-if (username) {
-  loginScreen.classList.add("hidden");
-  chatScreen.classList.remove("hidden");
-  setupPubNub();
-  loadHistory();
-}
+    if (item.type.startsWith("image
