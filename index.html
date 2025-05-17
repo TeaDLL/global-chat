@@ -1,32 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title> Chat </title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.7.2.2.min.js"></script>
+<meta charset="UTF-8" />
+<title>Test Black Chat</title>
+<style>
+  body {
+    margin: 0; 
+    background: black; 
+    color: white; 
+    font-family: Arial, sans-serif;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
+  }
+  #login-screen, #chat-screen {
+    background: #111;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+  }
+</style>
 </head>
 <body>
-  <div id="chat-app">
-    <div id="login-screen" class="glass-box">
-      <h1> Chat< /h1>
-      <input type="text" id="username" placeholder="Enter a username" />
-      <button id="login-btn">Join Chat</button>
-    </div>
-
-    <div id="chat-screen" class="hidden">
-      <div class="chat-header">Global Chat Room</div>
-      <div id="messages"></div>
-
-      <div class="chat-controls">
-        <textarea id="message-input" placeholder="Type your message or paste an image..."></textarea>
-        <input type="file" id="image-upload" accept="image/*" hidden />
-        <button id="image-btn">📷</button>
-        <button id="send-btn">Send</button>
-      </div>
-    </div>
+  <div id="login-screen">
+    <h2>Login</h2>
+    <input id="username" placeholder="Username" />
+    <button id="login-btn">Join</button>
   </div>
-
-  <script src="app.js"></script>
+  <div id="chat-screen" style="display:none;">
+    <h2>Chat</h2>
+    <div id="messages" style="height: 300px; overflow-y: auto; background:#222; margin-bottom:10px;"></div>
+    <textarea id="message-input" rows="3" style="width:100%;"></textarea><br />
+    <button id="send-btn">Send</button>
+  </div>
+<script>
+  const loginScreen = document.getElementById('login-screen');
+  const chatScreen = document.getElementById('chat-screen');
+  document.getElementById('login-btn').onclick = () => {
+    const user = document.getElementById('username').value.trim();
+    if(!user) return alert('Enter username');
+    loginScreen.style.display = 'none';
+    chatScreen.style.display = 'block';
+  };
+</script>
 </body>
 </html>
