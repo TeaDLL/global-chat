@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Global Chat</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title> Chat </title>
+  <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.7.2.2.min.js"></script>
 </head>
 <body>
-  <div id="login">
-    <input type="text" id="username" placeholder="Enter a username" />
-    <button id="joinBtn">Join Chat</button>
-  </div>
+  <div id="chat-app">
+    <div id="login-screen" class="glass-box">
+      <h1> Chat< /h1>
+      <input type="text" id="username" placeholder="Enter a username" />
+      <button id="login-btn">Join Chat</button>
+    </div>
 
-  <div id="chat" class="hidden">
-    <h2>🌐 Global Chat</h2>
-    <div id="messages"></div>
-    <textarea id="msg" placeholder="Type a message..."></textarea>
-    <button id="send">Send</button>
+    <div id="chat-screen" class="hidden">
+      <div class="chat-header">Global Chat Room</div>
+      <div id="messages"></div>
+
+      <div class="chat-controls">
+        <textarea id="message-input" placeholder="Type your message or paste an image..."></textarea>
+        <input type="file" id="image-upload" accept="image/*" hidden />
+        <button id="image-btn">📷</button>
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
   </div>
 
   <script src="app.js"></script>
