@@ -1,37 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8" />
-  <title>Black & White Glowing Chat</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.7.2.2.min.js"></script>
-</head>
-<body>
-  <div id="app">
-
-    <!-- Login Screen -->
-    <div id="login-screen" class="screen">
-      <h2>Enter your username</h2>
-      <input type="text" id="username" placeholder="Username" autocomplete="off" />
-      <button id="login-btn">Join Chat</button>
-    </div>
-
-    <!-- Chat Screen -->
-    <div id="chat-screen" class="screen hidden">
-      <header>
-        <h2>Global Chat</h2>
-      </header>
-      <div id="messages" tabindex="0"></div>
-      <footer>
-        <textarea id="message-input" placeholder="Type a message" rows="1"></textarea>
-        <input type="file" id="image-upload" accept="image/*" hidden />
-        <button id="image-btn" title="Attach Image">📎</button>
-        <button id="send-btn" title="Send">➤</button>
-      </footer>
-    </div>
-
-  </div>
-
-  <script src="app.js"></script>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>gcht</title>
+  </head>
+  <body>
+    <div id="root"></div>  <!-- React injects your entire app here -->
+  </body>
 </html>
+
